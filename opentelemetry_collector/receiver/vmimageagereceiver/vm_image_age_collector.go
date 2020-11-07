@@ -35,7 +35,7 @@ type VMImageAgeCollector struct {
 }
 
 const (
-	defaultExportInterval = 10 * time.Minute
+	defaultExportInterval = 1 * time.Minute
 )
 
 // NewVMImageAgeCollector creates a new VMImageAgeCollector that generates metrics
@@ -137,5 +137,7 @@ func (collector *VMImageAgeCollector) scrapeAndExport() {
 	err := collector.consumer.ConsumeMetrics(ctx, internaldata.OCSliceToMetrics([]consumerdata.MetricsData{md}))
 	if err != nil {
 		collector.logger.Error("Error sending metrics", zap.Error(err))
+	} else {
+		collector.logger.Info("Successfully sent metric to exporter")
 	}
 }
