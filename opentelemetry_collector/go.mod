@@ -2,6 +2,9 @@ module github.com/googlecloudplatform/appengine-sidecars-docker/opentelemetry_co
 
 go 1.14
 
+replace github.com/open-telemetry/opentelemetry-collector-contrib/exporter/stackdriverexporter => /usr/local/google/home/imccarten/go/src/github.com/open-telemetry/opentelemetry-collector-contrib/exporter/stackdriverexporter
+replace go.opentelemetry.io/collector => /usr/local/google/home/imccarten/Documents/opentelemetry-local-copy/opentelemetry-collector
+
 require (
 	contrib.go.opencensus.io/exporter/jaeger v0.1.1-0.20190430175949-e8b55949d948 // indirect
 	contrib.go.opencensus.io/exporter/ocagent v0.7.0 // indirect
@@ -17,7 +20,7 @@ require (
 	github.com/ory/x v0.0.109 // indirect
 	github.com/securego/gosec v0.0.0-20200316084457-7da9f46445fd // indirect
 	github.com/stretchr/testify v1.6.1
-	go.opentelemetry.io/collector v0.14.0
+	go.opentelemetry.io/collector v0.14.1-0.20201106172639-0f8e82223a4b
 	go.uber.org/zap v1.16.0
 	golang.org/x/sys v0.0.0-20200905004654-be1d3432aa8f
 	sigs.k8s.io/structured-merge-diff v0.0.0-20190525122527-15d366b2352e // indirect

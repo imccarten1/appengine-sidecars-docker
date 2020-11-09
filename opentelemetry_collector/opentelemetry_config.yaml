@@ -30,7 +30,3 @@ service:
       receivers: [vmimageage, nginxstats]
       processors: [resource]
       exporters: [stackdriver]
-    metrics/instance:
-      receivers: [dockerstats]
-      processors: [resource]
-      exporters: [stackdriver/instance]

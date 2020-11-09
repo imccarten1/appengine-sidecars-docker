@@ -1,6 +1,7 @@
 package vmimageagereceiver
 
 import (
+	"fmt"
 	"context"
 	"errors"
 	"time"
@@ -134,7 +135,12 @@ func (collector *VMImageAgeCollector) scrapeAndExport() {
 
 	ctx := context.Background()
 	md := consumerdata.MetricsData{Metrics: metrics}
-	err := collector.consumer.ConsumeMetrics(ctx, internaldata.OCSliceToMetrics([]consumerdata.MetricsData{md}))
+	collector.logger.Info(md.Metrics[0].String())
+	internalMetric := internaldata.OCSliceToMetrics([]consumerdata.MetricsData{md})
+	fmt.Printf("%+v\n", internalMetric.ResourceMetrics().At(0).InstrumentationLibraryMetrics())
+	fmt.Printf("resource metrics length %d\n", internalMetric.ResourceMetrics().Len())
+	collector.logger.Info(internaldata.MetricsToOC(internalMetric)[0].Metrics[0].String())
+	err := collector.consumer.ConsumeMetrics(ctx, internalMetric)
 	if err != nil {
 		collector.logger.Error("Error sending metrics", zap.Error(err))
 	} else {
